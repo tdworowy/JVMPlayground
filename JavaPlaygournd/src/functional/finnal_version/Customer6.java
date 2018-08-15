@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Customer6 {
     public static ArrayList<Customer6> allCustomers = new ArrayList<>();
-    public int id =0;
+    public int id = 0;
     private String name;
     private String address;
     private String state;
