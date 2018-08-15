@@ -1,0 +1,263 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>JavaPlayground</groupId>
+    <version>1</version>
+    <artifactId>JavaPlayground</artifactId>
+
+
+    <repositories>
+        <repository>
+            <id>forplay-legacy</id>
+            <url>http://forplay.googlecode.com/svn/mavenrepo</url>
+        </repository>
+        <repository>
+            <id>scribe-java-mvn-repo</id>
+            <url>https://raw.github.com/fernandezpablo85/scribe-java/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert-core</artifactId>
+            <version>2.0M10</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-core</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <!-- <dependency> -->
+        <!-- <groupId>org.testng</groupId> -->
+        <!-- <artifactId>testng</artifactId> -->
+        <!-- <version>6.8</version> -->
+        <!-- </dependency> -->
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+
+        <!-- <dependency> <groupId>org.seleniumhq.selenium</groupId> <artifactId>selenium-java</artifactId>
+            <version>2.53.0</version> </dependency> <dependency> <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId> <version>2.53.0</version>
+            </dependency> -->
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+            <dependency> <groupId>org.eclipse.jetty</groupId> <artifactId>jetty-server</artifactId>
+            <version>9.4.0.RC1</version> </dependency> -->
+        <!-- <dependency> <groupId>org.seleniumhq.selenium</groupId> <artifactId>selenium-firefox-driver</artifactId>
+            <version>2.53.1</version> </dependency> -->
+        <!-- jersey client api for REST -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.8</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- joda time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <!-- OAuth client dependency -->
+        <dependency>
+            <groupId>com.sun.jersey.contribs.jersey-oauth</groupId>
+            <artifactId>oauth-signature</artifactId>
+            <version>1.8</version>
+        </dependency>
+
+        <dependency>
+            <!-- jsoup HTML parser library @ http://jsoup.org/ -->
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+
+        <!-- XLS reader -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.12</version>
+        </dependency>
+
+        <!-- jdbc <dependency> <groupId>oracle</groupId> <artifactId>ojdbc5</artifactId>
+            <version>11.1.0.7.0</version> </dependency> -->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sourceforge.javacsv</groupId>
+            <artifactId>javacsv</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.4</version>
+        </dependency>
+
+        <!-- HSQLDB -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scribe</groupId>
+            <artifactId>scribe</artifactId>
+            <version>1.3.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
+        </dependency>
+        <dependency>
+            <groupId>br.eti.kinoshita</groupId>
+            <artifactId>testlink-java-api</artifactId>
+            <!-- <version>1.9.13-0</version> -->
+            <version>1.9.14-0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- BE integration <dependency> <groupId>com.alan.cream</groupId> <artifactId>network-testing</artifactId>
+            <version>2.3-SNAPSHOT</version> </dependency> -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-cache</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okio</groupId>
+            <artifactId>okio</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <!-- END BE integration -->
+
+        <!-- MAC Stuff for webdriver -->
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
+
+        <!-- Logging -->
+
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+    </dependencies>
+
+    <reporting>
+        <plugins>
+            <!-- <plugin> <artifactId>maven-dependency-plugin</artifactId> <version>2.8</version>
+                </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version> </plugin> -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <showSuccess>true</showSuccess>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <encoding>UTF-8</encoding>
+                    <!-- <argLine>-Xmx5120m</argLine> -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <!-- <argLine>-Xmx5120m</argLine> -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+
+                <!-- joem conf -->
+                <configuration>
+                    <parallel>classes</parallel>
+                    <threadCount>1</threadCount>
+                    <forkCount>21</forkCount>
+                    <reuseForks>false</reuseForks>
+                    <!--<parallel>methods</parallel>
+                    <threadCount>2</threadCount>
+                    <forkCount>16</forkCount>
+
+                    <perCoreThreadCount>false</perCoreThreadCount>
+                    -->
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <!-- <argLine>-Xmx5120m</argLine> -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+
+                <!-- -->
+                <!-- Jakub conf -->
+                <!-- <configuration> <parallel>both</parallel> <threadCount>10</threadCount>
+                    <forkCount>50</forkCount> <perCoreThreadCount>false</perCoreThreadCount>
+                    </configuration> -->
+            </plugin>
+        </plugins>
+    </build>
+</project>

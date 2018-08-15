@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="Maven 1" modules="Gatling,ScalaPlayground">
+      <plugins>
+        <plugin path="C:\Users\Tomasz\.m2\repository\com\artima\supersafe\supersafe_2.11.7\1.1.0-RC7\supersafe_2.11.7-1.1.0-RC7.jar" />
+      </plugins>
+    </profile>
+  </component>
+</project>
