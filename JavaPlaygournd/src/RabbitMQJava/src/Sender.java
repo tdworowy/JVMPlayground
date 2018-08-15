@@ -1,3 +1,4 @@
+package RabbitMQJava.src;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
@@ -9,16 +10,15 @@ public class Sender {
 	
 	private ConnectionFactory factory;
 	private Connection connection;
-	private ConectionInfo info ;
 	private Channel channel;
 	
 	public Sender(){
 		this.factory = new ConnectionFactory();
-	    this.factory.setHost(info.getHost());
-	    this.factory.setUsername(info.getUserName());
-	    this.factory.setPassword(info.getPassword());
-	    this.factory.setPort(info.getPort());
-	    this.factory.setVirtualHost(info.getVirtualHost());
+	    this.factory.setHost(ConnectionInfo.getHost());
+	    this.factory.setUsername(ConnectionInfo.getUserName());
+	    this.factory.setPassword(ConnectionInfo.getPassword());
+	    this.factory.setPort(ConnectionInfo.getPort());
+	    this.factory.setVirtualHost(ConnectionInfo.getVirtualHost());
 	    
 	}
 	
@@ -26,7 +26,7 @@ public class Sender {
 	public void SendMessage(String message,	Channel channel){
 		
 		try{
-		channel.basicPublish("",info.getPythonQueeName(), null, message.getBytes());
+		channel.basicPublish("", ConnectionInfo.getPythonQueue(), null, message.getBytes());
 		System.out.println("Message Sent: '" + message + "'");
 		}
 		catch (IOException e) {
@@ -57,7 +57,7 @@ public class Sender {
 			connection = factory.newConnection();
 
 			this.channel = connection.createChannel();			
-			channel.queueDeclare(info.getPythonQueeName(), false, false, false, null);
+			channel.queueDeclare(ConnectionInfo.getPythonQueue(), false, false, false, null);
 				
 			
 		} catch (IOException e) {

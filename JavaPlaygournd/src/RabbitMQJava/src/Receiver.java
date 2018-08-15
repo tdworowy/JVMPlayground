@@ -1,3 +1,5 @@
+package RabbitMQJava.src;
+
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 import com.rabbitmq.client.ConnectionFactory;
@@ -13,16 +15,16 @@ public class Receiver {
 
 	private ConnectionFactory factory;
 	private Connection connection;
-	private ConectionInfo info ;
+	private ConnectionInfo info ;
 	private Channel channel;
 	
 	public Receiver(){
 		this.factory = new ConnectionFactory();
-	    this.factory.setHost(info.getHost());
-	    this.factory.setUsername(info.getUserName());
-	    this.factory.setPassword(info.getPassword());
-	    this.factory.setPort(info.getPort());
-	    this.factory.setVirtualHost(info.getVirtualHost());
+	    this.factory.setHost(ConnectionInfo.getHost());
+	    this.factory.setUsername(ConnectionInfo.getUserName());
+	    this.factory.setPassword(ConnectionInfo.getPassword());
+	    this.factory.setPort(ConnectionInfo.getPort());
+	    this.factory.setVirtualHost(ConnectionInfo.getVirtualHost());
 	    
 	}
 	
@@ -35,7 +37,7 @@ public class Receiver {
 		try {
 		this.connection = factory.newConnection();	
 		this.channel = connection.createChannel();
-		this.channel.queueDeclare(info.getJavaQueeName(), false, false, false, null);
+		this.channel.queueDeclare(ConnectionInfo.getJavaQueue(), false, false, false, null);
 		
 		
 		} catch (IOException e) {
@@ -63,7 +65,7 @@ public class Receiver {
 				}
 			};
 			// loop that waits for message 		
-			channel.basicConsume(info.getJavaQueeName(), true, consumer);
+			channel.basicConsume(ConnectionInfo.getJavaQueue(), true, consumer);
 		} catch (IOException e) {
 			System.out.println("RabbitMQ server is Down !");
 		

@@ -1,3 +1,5 @@
+import RabbitMQJava.src.Receiver;
+import RabbitMQJava.src.Sender;
 
 public class Main {
 	
@@ -7,11 +9,11 @@ public class Main {
  
 	public static void main(String [ ] args)
 	{
-		Receiver rceiver = new Receiver();
+		Receiver receiver = new Receiver();
 		Sender sender = new Sender();
 	
 		sender.openQuee();
-		rceiver.OpenQuee();
+		receiver.OpenQuee();
 		
 		
 		
@@ -36,7 +38,7 @@ Runnable task1 =() -> {
 Runnable task2 =() ->{
 	      try {	   
 			while(true){
-				rceiver.reciveMessage(rceiver.getChannel());
+				receiver.reciveMessage(receiver.getChannel());
 				Thread.sleep(2000);
 				}
 			}

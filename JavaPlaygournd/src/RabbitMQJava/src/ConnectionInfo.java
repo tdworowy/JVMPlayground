@@ -1,29 +1,29 @@
+package RabbitMQJava.src;
 
+public class ConnectionInfo {
 
-public class ConectionInfo {
-	
 	private static String host = "192.168.99.100";
 	private static String userName = "admin";
 	private static String password = "s0m3p4ssw0rd";
 	private static int port = 5672;
 	private static String virtualHost = "/";
-	private static String javaQueeName = "JavaQueue";
-	private static String pythonQueeName = "PythonQueue";
+	private static String javaQueue = "JavaQueue";
+	private static String pythonQueue = "PythonQueue";
 
-	public static String getJavaQueeName() {
-		return javaQueeName;
+	public static String getJavaQueue() {
+		return javaQueue;
 	}
 
-	public  static void setJavaQueeName(String javaQueeName) {
-		javaQueeName = javaQueeName;
+	public  static void setJavaQueue(String javaQueue) {
+		javaQueue = javaQueue;
 	}
 
-	public static String getPythonQueeName() {
-		return pythonQueeName;
+	public static String getPythonQueue() {
+		return pythonQueue;
 	}
 
-	public static void setPythonQueeName(String pythonQueeName) {
-		pythonQueeName = pythonQueeName;
+	public static void setPythonQueue(String pythonQueue) {
+		pythonQueue = pythonQueue;
 	}
 
 

@@ -7,14 +7,14 @@ import java.util.List;
  * Created by Tomasz on 03/04/2017.
  */
 public class Customer5 {
-    static public ArrayList<Customer5> allCustomers =new ArrayList<>();
-    public int id =0;
-    public String name;
-    public String address;
-    public String state;
-    public String primaryContact;
-    public String domain;
-    public boolean enabled =true;
+    private static ArrayList<Customer5> allCustomers = new ArrayList<>();
+    private int id =0;
+    private String name;
+    private String address;
+    private String state;
+    private String primaryContact;
+    private String domain;
+    private boolean enabled = true;
 
 
 
