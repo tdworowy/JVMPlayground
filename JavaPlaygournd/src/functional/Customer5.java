@@ -88,7 +88,7 @@ public class Customer5 {
     public static List<String> getEnabledCustomersSomeoneEmail(final  String someone) {
         return Customer5.getEnabledCustomersField(new Function1<Customer5, String>() {
             public String call(Customer5 customer) {
-                return someone+"b@"+customer.domain;
+                return someone+"@"+customer.domain;
             }
         });
     }
