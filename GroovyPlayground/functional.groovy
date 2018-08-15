@@ -1,21 +1,15 @@
-
-import java.util.ArrayList
-import java.util.List
-import java.util.Calendar
-
-
-public class Contract {
-    public Contract setBegin_date(Calendar begin_date) {
+ class Contract {
+    Contract setBegin_date(Calendar begin_date) {
         this.begin_date = begin_date
         return this
     }
 
-    public Contract setEnd_date(Calendar end_date) {
+    Contract setEnd_date(Calendar end_date) {
         this.end_date = end_date
         return this
     }
 
-    public Contract setEnabled(Boolean enabled) {
+    Contract setEnabled(Boolean enabled) {
         this.enabled = enabled
         return this
     }
@@ -25,23 +19,22 @@ public class Contract {
     public Boolean enabled = true
 
 
-    public Contract(Calendar begin_date){
+     Contract(Calendar begin_date){
         this.begin_date = begin_date
         this.end_date = Calendar.getInstance()
         this.end_date.setTimeInMillis(this.begin_date.getTimeInMillis())
         this.end_date.add(Calendar.YEAR,2)
     }
-    public static List<Object> setContractForCustomer(Integer customer_id, final Boolean status){
+    static List<Object> setContractForCustomer(Integer customer_id, final Boolean status){
         map(Customer.getCustomerById(Customer.allCustomers, customer_id), {customer -> customer.contract.enabled = status})
     }
 
-    public static void display(Integer customer_id){
+    static void display(Integer customer_id){
         foreach( setContractForCustomer(customer_id, true),{contract -> print(contract)})
 
     }
 
 }
-
 
  class Customer {
      static ArrayList<Customer> allCustomers = new ArrayList<>()
@@ -108,8 +101,8 @@ public class Contract {
     }
 
 
-    static def Closure<Boolean> EnabledCustomer ={ customer -> customer.enabled  == true}
-    static def Closure<Boolean> DisabledCustomer ={ customer -> customer.enabled  == false}
+    static Closure<Boolean> EnabledCustomer ={ customer -> customer.enabled  == true}
+    static Closure<Boolean> DisabledCustomer ={ customer -> customer.enabled  == false}
      Customer(){}
 
      static def getEnabledCustomerAddresses(){

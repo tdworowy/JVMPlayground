@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c5111fb-17a1-435e-a291-3a0fe9967f6f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../GroovyPlayground/functional.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functional/finnal_version/Customer6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/functional/finnal_version/Customer6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GroovyPlayground/functional.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/../GroovyPlayground/functional.groovy" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
