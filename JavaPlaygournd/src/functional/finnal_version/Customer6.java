@@ -12,6 +12,47 @@ public class Customer6 {
     private String name;
     private String address;
     private String state;
+
+    public Customer6 setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public Customer6 setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Customer6 setAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public Customer6 setState(String state) {
+        this.state = state;
+        return this;
+    }
+
+    public Customer6 setPrimaryContact(String primaryContact) {
+        this.primaryContact = primaryContact;
+        return this;
+    }
+
+    public Customer6 setDomain(String domain) {
+        this.domain = domain;
+        return this;
+    }
+
+    public Customer6 setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+    }
+
+    public Customer6 setContract(Contract contract) {
+        this.contract = contract;
+        return this;
+    }
+
     private String primaryContact;
     private String domain;
     public Boolean enabled = true;
@@ -29,11 +70,6 @@ public class Customer6 {
     }
 
 
-    public static void foreach(List<Customer6> inList, Foreach1<Customer6> func){
-        for(Customer6 customer: inList){
-            func.call(customer);
-        }
-    }
     static final public Function1 <Customer6, Boolean> EnableCustomer =
             customer -> customer.enabled;
 
@@ -90,23 +126,14 @@ public class Customer6 {
 
     public static <B> List<B> getField(Function1 <Customer6, Boolean> test, Function1<Customer6,B> func){
         List<B> outLiSt = new ArrayList<B>();
-        for(Customer6 customer : Customer6.filter(Customer6.allCustomers,test))
+        for(Customer6 customer : FunctionalConcepts.filter(Customer6.allCustomers,test))
             outLiSt.add(func.call(customer));
         return outLiSt;
     }
 
-    public static List<Customer6> filter(List<Customer6> initList,Function1 <Customer6, Boolean> test){
-        List<Customer6> outLiSt = new ArrayList<>();
-        for(Customer6 customer : initList) {
-            if (test.call((customer))){
-                outLiSt.add(customer);
-            }
-        }
-    return outLiSt;
-    }
 
     public static List<Customer6> getCustomerById(List<Customer6> initList,final Integer customer_id){
-        return Customer6.filter(initList,customer -> customer.id == customer_id);
+        return FunctionalConcepts.filter(initList,customer -> customer.id == customer_id);
     }
 
     public static void main(String[] args){
@@ -125,6 +152,7 @@ public class Customer6 {
     }
 
 
-    }
+
+}
 
 
