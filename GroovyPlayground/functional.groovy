@@ -1,111 +1,85 @@
  class Contract {
-    Contract setBegin_date(Calendar begin_date) {
-        this.begin_date = begin_date
-        return this
-    }
 
-    Contract setEnd_date(Calendar end_date) {
-        this.end_date = end_date
-        return this
-    }
+    final Calendar begin_date
+    final Calendar end_date
+    final Boolean enabled
 
-    Contract setEnabled(Boolean enabled) {
-        this.enabled = enabled
-        return this
-    }
-
-    public Calendar begin_date
-    public Calendar end_date
-    public Boolean enabled = true
-
-
-     Contract(Calendar begin_date){
+     Contract(Calendar begin_date, enabled){
         this.begin_date = begin_date
         this.end_date = Calendar.getInstance()
         this.end_date.setTimeInMillis(this.begin_date.getTimeInMillis())
         this.end_date.add(Calendar.YEAR,2)
+        this.enabled = enabled
     }
-    static List<Object> setContractForCustomer(Integer customer_id, final Boolean status){
-        map(Customer.getCustomerById(Customer.allCustomers, customer_id), {customer -> customer.contract.enabled = status})
-    }
-
-    static void display(Integer customer_id){
-        foreach( setContractForCustomer(customer_id, true),{contract -> print(contract)})
-
+    static List<Object> setContractForCustomer(List<Integer> ids, final Boolean status){
+        Customer.updateContractForCustomerList(ids, {contract ->
+            new Contract(contract.begin_date,status)
+        })
     }
 
+
+    static void display(List<Integer> ids){
+        foreach( setContractForCustomer(ids, true),{contract -> print(contract)})
+
+    }
 }
 
  class Customer {
-     static ArrayList<Customer> allCustomers = new ArrayList<>()
-    public int id = 0
-    private  name
-    private  address
-    private  state
-
-     Customer setId(id) {
-        this.id = id
-        return this
-
-     }
-
-     Customer setName(name) {
-        this.name = name
-        return this
-    }
-
-     Customer setAddress(address) {
-        this.address = address
-        return this
-    }
-
-     Customer setState(state) {
-        this.state = state
-        return this
-    }
-
-     Customer setPrimaryContact(primaryContact) {
-        this.primaryContact = primaryContact
-        return this
-    }
-
-     Customer setDomain(domain) {
-        this.domain = domain
-        return this
-    }
-
-     Customer setEnabled(enabled) {
-        this.enabled = enabled
-        return this
-    }
-
-     Customer setContract(contract) {
-        this.contract = contract
-        return this
-    }
-
-     String primaryContact
-     String domain
-     Boolean enabled = true
-     Contract contract
-
-
-
-     Customer(String name, String address, String state, String primaryContact , String domain){
-        this.id +=1
-        this.name = name
-        this.address = address
-        this.state = state
-        this.primaryContact = primaryContact
-        this.domain = domain
-    }
-
+     static List<Customer> allCustomers = new ArrayList<>()
+     final int id
+     final name
+     final address
+     final state
+     final String  primaryContact
+     final String  domain
+     final Boolean  enabled
+     final Contract  contract
 
     static Closure<Boolean> EnabledCustomer ={ customer -> customer.enabled  == true}
     static Closure<Boolean> DisabledCustomer ={ customer -> customer.enabled  == false}
-     Customer(){}
 
-     static def getEnabledCustomerAddresses(){
+     Customer(int id,name, address, state,  primaryContact,  domain, Contract contract, enabled){
+         this.name = name
+         this.address = address
+         this.state = state
+         this.primaryContact = primaryContact
+         this.domain = domain
+         this.contract = contract
+         this.id = id
+         this.enabled = enabled
+     }
+
+
+     static List<Customer> updateContractForCustomerList(List<Integer>ids, cls){
+         Customer.allCustomers.collect{ customer ->
+             if(ids.indexOf(customer.id) >=0){
+                 new Customer(
+                         customer.id,
+                         customer.name,
+                         customer.address,
+                         customer.state,
+                         customer.primaryContact,
+                         customer.domain,
+                         cls(customer.contract),
+                         customer.enabled)
+             }else {
+                 customer
+             }
+         }
+     }
+    //tail recurenction
+     static int countEnabledCustomersWithNotEnabledContracts(List<Customer> customers, int sum){
+         if (customers.isEmpty()){
+             return sum
+         }
+         else {
+             int addition =(customers.head().enabled && (! customers.head().contract.enabled)) ? 1:0
+             return addition + countEnabledCustomersWithNotEnabledContracts(customers.tail(), sum+addition)
+         }
+
+     }
+
+     static List<String> getEnabledCustomerAddresses(){
         Customer.allCustomers.findAll(EnabledCustomer).collect({customer ->customer.address})
     }
      static List<String> getEnabledCustomerNames(){
@@ -128,7 +102,6 @@
      static List<String> getEnabledCustomersSomeoneEmail(final  String someone) {
          Customer.allCustomers.findAll(EnabledCustomer).collect({customer -> someone+"@"+customer.domain})
     }
-
 
      static List<String> getDisabledCustomerAddresses(){
          Customer.allCustomers.findAll(DisabledCustomer).collect({customer -> customer.address})
@@ -159,9 +132,15 @@
         initList.findAll({customer -> customer.id == customer_id})
     }
 
+     static  eachEnableContact(cls){
+         Customer.allCustomers.findAll{customer ->customer.enabled && customer.contract.enabled}.
+                 each {customer -> customer.contract.
+                         each {cls}}
+     }
+
  }
-        Customer customer1= new Customer("Rick1","add1","state",null,"domain")
-        Customer customer2= new Customer("Rick2","add2","state",null,"domain")
+        Customer customer1= new Customer(1,"Rick1", "add1", "state", null, "domain", null, null)
+        Customer customer2= new Customer(1,"Rick2", "add2", "state", null, "domain", null, null)
         Customer.allCustomers.add(customer1)
         Customer.allCustomers.add(customer2)
 
