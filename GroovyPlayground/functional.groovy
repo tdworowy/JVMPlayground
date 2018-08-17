@@ -67,17 +67,18 @@
              }
          }
      }
-    //tail recurenction
-     static int countEnabledCustomersWithNotEnabledContracts(List<Customer> customers, int sum){
-         if (customers.isEmpty()){
+    //tail recurenction, something is wrong
+     def countEnabledCustomersWithNotEnabledContracts = null
+     countEnabledCustomersWithNotEnabledContracts = {List<Customer> customers,
+          sum ->
+         if (customers.isEmpty()) {
              return sum
-         }
-         else {
-             int addition =(customers.head().enabled && (! customers.head().contract.enabled)) ? 1:0
-             return addition + countEnabledCustomersWithNotEnabledContracts(customers.tail(), sum+addition)
+         } else {
+             int addition = (customers.head().enabled && (!customers.head().contract.enabled)) ? 1 : 0
+             return countEnabledCustomersWithNotEnabledContracts.trampoline(customers.tail(), sum + addition)
          }
 
-     }
+     }.trampoline()
 
      static List<String> getEnabledCustomerAddresses(){
         Customer.allCustomers.findAll(EnabledCustomer).collect({customer ->customer.address})
