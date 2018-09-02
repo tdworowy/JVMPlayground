@@ -1,6 +1,7 @@
 //import collection.mutable.Stack
 //import org.scalatest
 
+package ScalaStaff
 
 
 
@@ -66,6 +67,6 @@ object FizzBuzz2{
 //    FizzBuzz2.getResult(2) should be ("2")
 //    FizzBuzz2.getResult(4) should be ("4")
 //  }
-
+//
 //}
 

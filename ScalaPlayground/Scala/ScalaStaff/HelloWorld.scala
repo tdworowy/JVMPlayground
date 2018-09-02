@@ -1,9 +1,7 @@
-/**
-  * Created by Tomasz on 11/03/2017.
-  */
+package ScalaStaff
 
 object HelloWorld {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println("Hello, world!")
   }
 }

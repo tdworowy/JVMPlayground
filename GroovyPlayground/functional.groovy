@@ -4,6 +4,7 @@
     final Calendar end_date
     final Boolean enabled
 
+
      Contract(Calendar begin_date, enabled){
         this.begin_date = begin_date
         this.end_date = Calendar.getInstance()
@@ -34,11 +35,20 @@
      final String  domain
      final Boolean  enabled
      final Contract  contract
-
+     final List<Double> contractsValues
+     //lazy
+     @Lazy volatile Double revenue = CalculateRevenue(this.contractsValues)
+     static  def CalculateRevenue(contractsValues){
+         Double sum = 0.0
+         for(Double value : contractsValues){
+             sum += value
+         }
+         sum
+     }
     static Closure<Boolean> EnabledCustomer ={ customer -> customer.enabled  == true}
     static Closure<Boolean> DisabledCustomer ={ customer -> customer.enabled  == false}
 
-     Customer(int id,name, address, state,  primaryContact,  domain, Contract contract, enabled){
+     Customer(int id, name, address, state, primaryContact, domain, Contract contract, enabled, List<Double> contractsValues){
          this.name = name
          this.address = address
          this.state = state
@@ -47,6 +57,7 @@
          this.contract = contract
          this.id = id
          this.enabled = enabled
+         this.contractsValues = contractsValues
      }
 
 
@@ -61,24 +72,24 @@
                          customer.primaryContact,
                          customer.domain,
                          cls(customer.contract),
-                         customer.enabled)
+                         customer.enabled, null)
              }else {
                  customer
              }
          }
      }
     //tail recurenction, something is wrong
-     def countEnabledCustomersWithNotEnabledContracts = null
-     countEnabledCustomersWithNotEnabledContracts = {List<Customer> customers,
-          sum ->
-         if (customers.isEmpty()) {
-             return sum
-         } else {
-             int addition = (customers.head().enabled && (!customers.head().contract.enabled)) ? 1 : 0
-             return countEnabledCustomersWithNotEnabledContracts.trampoline(customers.tail(), sum + addition)
-         }
-
-     }.trampoline()
+//     def countEnabledCustomersWithNotEnabledContracts = null
+//     countEnabledCustomersWithNotEnabledContracts = {List<Customer> customers,
+//          sum ->
+//         if (customers.isEmpty()) {
+//             return sum
+//         } else {
+//             int addition = (customers.head().enabled && (!customers.head().contract.enabled)) ? 1 : 0
+//             return countEnabledCustomersWithNotEnabledContracts.trampoline(customers.tail(), sum + addition)
+//         }
+//
+//     }.trampoline()
 
      static List<String> getEnabledCustomerAddresses(){
         Customer.allCustomers.findAll(EnabledCustomer).collect({customer ->customer.address})
@@ -140,8 +151,8 @@
      }
 
  }
-        Customer customer1= new Customer(1,"Rick1", "add1", "state", null, "domain", null, null)
-        Customer customer2= new Customer(1,"Rick2", "add2", "state", null, "domain", null, null)
+        Customer customer1= new Customer(1, "Rick1", "add1", "state", null, "domain", null, null, null)
+        Customer customer2= new Customer(1, "Rick2", "add2", "state", null, "domain", null, null, null)
         Customer.allCustomers.add(customer1)
         Customer.allCustomers.add(customer2)
 
