@@ -1,6 +1,6 @@
 package ScalaStaff
 
-class Customer(val id : Integer, val enabled : Boolean, val contracts : List[Double]){
+class Customer2(val id : Integer, val enabled : Boolean, val contracts : List[Double]){
   lazy val revenue : Double = CalculateRevenue(this.contracts)
 
   def CalculateRevenue(contracts: List[Double]) : Double = {
