@@ -10,7 +10,7 @@ object Contact{
     Customer.updateContactForCustomerContact(
       customer_id,
       contact_id,
-      {contact => new contact(
+      {contact => new Contact(
         contact.contact_id,
         contact.firstName,
         name,
