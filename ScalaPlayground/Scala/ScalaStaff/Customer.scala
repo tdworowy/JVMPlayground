@@ -1,4 +1,5 @@
 package ScalaStaff
+import java.util.Calendar
 
 object Customer {
   val allCustomers = List[Customer]()
@@ -34,22 +35,17 @@ object Customer {
   }
 
   def updateCustomerByIdList(initialids: List[Customer], ids: List[Integer], cls: Customer => Customer): List[Customer] = {
-    if (ids.size <= 0) {
-      initialids
-    } else if (initialids.size <= 0) {
-      List()
-    } else {
-      val precust = initialids.find(cust => cust.customer_id == ids(0))
-      val cust = if (precust.isEmpty) {
-        List()
-      } else {
-        List(cls(precust.get))
+    (initialids, ids) match{
+      case (List(), _) => initialids
+      case (_, List()) => initialids
+      case (_, id ::tailIds) =>{
+        initialids.find(cust => cust.customer_id == id) match {
+          case None => updateCustomerByIdList(initialids, tailIds, cls)
+          case Some(cust) => updateCustomerByIdList(
+            initialids.filter( cust => cust.customer_id ==id),tailIds, cls
+          )
+        }
       }
-      cust ::: updateCustomerByIdList(
-        initialids.filter(cust => cust.customer_id == ids(0)),
-        ids.drop(1),
-        cls
-      )
     }
   }
 
@@ -92,21 +88,43 @@ object Customer {
   }
 
   def countEnabledCustomerWithEnabledContacts(customers: List[Customer], sum: Int): Integer = {
-    if (customers.isEmpty) {
-      sum
-    } else {
-      val addition = if (customers.head.enabled && customers.head.contacts.exists({ contact => contact.enabled })) {
-        1
-      } else {
-        0
-      }
-
-      countEnabledCustomerWithEnabledContacts(customers.tail, addition + sum)
+    customers match {
+      case List() => sum
+      case Customer(_, _, _, _, true, _, List()) :: custs =>
+        countEnabledCustomerWithEnabledContacts(custs, sum)
+      case Customer(_, _, _, _, true, _, cont) :: custs
+        if cont.exists({contact => contact.enabled}) =>
+         countEnabledCustomerWithEnabledContacts(custs, sum + 1)
+      case cust :: custs => countEnabledCustomerWithEnabledContacts(custs, sum)
     }
   }
+
+  def createCustomer(name : String, state : String, domain : String) : Option[Customer] ={
+    def error(message : String ) : Option[Customer] = {
+      println(message)
+      None
+    }
+    (name, state, domain) match{
+      case("", _, _) => error("name can't be empty")
+      case(_, "", _) => error("state can't be empty")
+      case(_, _, "") => error("domain can't be empty")
+      case _ => new Some(new Customer(
+        0,
+        name,
+        state,
+        domain,
+        true,
+        new Contract(Calendar.getInstance, true),
+        List()
+      ))
+    }
+  }
+
 }
 
-class Customer(val customer_id :Integer,
+
+
+case class Customer(val customer_id :Integer,
                val name : String,
                val state : String,
                val domain : String,
