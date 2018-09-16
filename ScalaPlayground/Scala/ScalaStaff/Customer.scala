@@ -132,13 +132,15 @@ case class Customer(val customer_id :Integer,
                val contract : Contract,
                val contacts: List[Contact]){}
 
+
+// Somethink not work
 case class CommandLineOption(description : String, func : () => Unit)
 
 object  CommandLine {
 
   val options : Map[String, CommandLineOption] = Map(
     "1" -> new CommandLineOption("Add customer", Customer.createCustomer),
-    "2" -> new CommandLineOption("Display customers", Customer.allCustomers),
+    "2" -> new CommandLineOption("Display customers", Customer.list),
     "3" -> new CommandLineOption("Display enabled contacts for enabled customers",
       () => Customer.eachEnabledContact(contact => println(contact))),
     "w" -> new CommandLineOption("Exit", sys.exit)
@@ -149,9 +151,9 @@ object  CommandLine {
   }
   def prompt() = {
     options.foreach(option => println(option._1 + ") "+option._2.description))
-    options.get(askForInput(("Option").trim.toLowerCase) match{
+    options.get(askForInput("Option").trim.toLowerCase) match{
       case Some(CommandLineOption(_, exec)) => exec()
       case _ => println("Incorrect input")
-    })
+    }
   }
 }
