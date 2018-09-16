@@ -26,7 +26,33 @@ class Contact(val contact_id : Integer,
               val lastName : String,
               val email : String,
               val enabled : Boolean){
-  def sendEmail(): Unit ={
-    print("Email was send")
+
+def sendEmail() = {
+  new Email(this.email, "Subject", "Body", true, this.firstName).send()
+}
+}
+
+
+case class Email(val address : String,
+                 val subject : String,
+                 val body : String,
+                 val idDearReader : Boolean,
+                 val name : String){
+  def send() : Boolean = Email.send(this)
+}
+
+object Email{
+  def send(address : String, subject : String, body : String) : Boolean ={
+    println("To: " + address + "\nSubject: "+ subject+"\nContent: "+body)
+    true
+  }
+  def send(msg : Email) : Boolean = {
+    msg match {
+      case Email(address, subject, body, true, name) =>
+        send(address, subject, "Welcome, "+name + "\n"+ body)
+      case Email(address, subject, body, _, _) =>
+        send(address, subject, body)
+    }
+    true
   }
 }
